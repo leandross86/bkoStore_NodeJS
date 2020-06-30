@@ -29,7 +29,7 @@ const schema = new Schema({
         required: true,
         default: true
     },
-    tag: [{
+    tags: [{
         type: String,
         required: true
     }]
