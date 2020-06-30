@@ -2,9 +2,13 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const app = express();
 const router = express.Router();
+
+// Conecta ao banco de dados
+mongoose.connect('mongodb+srv://bko:88159371@cluster0.liapp.mongodb.net/NodeStore?retryWrites=true&w=majorityNodeStore?retryWrites=true&w=majority')
 
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
