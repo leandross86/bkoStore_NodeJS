@@ -10,9 +10,13 @@ const router = express.Router();
 // Conecta ao banco de dados
 mongoose.connect('mongodb+srv://bko:88159371@cluster0.liapp.mongodb.net/NodeStore?retryWrites=true&w=majorityNodeStore?retryWrites=true&w=majority')
 
+
+// Carrega os models
+const Product = require('./models/product');
+
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
-const productRoute = require('./routes/product-route')
+const productRoute = require('./routes/product-route');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ 
