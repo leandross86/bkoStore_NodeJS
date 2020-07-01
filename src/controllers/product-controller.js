@@ -1,7 +1,5 @@
 'use strict';
 
-const mongoose = require('mongoose');
-const Product = mongoose.model('Product');
 const ValidationContract = require('../validators/fluent-vallidator');
 const repository = require('../repositories/product-repository')
 
@@ -17,6 +15,7 @@ exports.get = async (req, res, next) => {
     };
     
 };
+
 exports.getBySlug = async (req, res, next) => {
     try {
         let data = await repository.getBySlug(req.params.slug)
@@ -27,6 +26,7 @@ exports.getBySlug = async (req, res, next) => {
         });
     };
 };
+
 exports.getById = async (req, res, next) => {
     try {
         let data = await repository.getById(req.params.id)
@@ -37,6 +37,7 @@ exports.getById = async (req, res, next) => {
         });
     };
 };
+
 exports.getByTag = async (req, res, next) => {
     try {
         let data = await repository.getByTag(req.params.tag)
@@ -71,7 +72,6 @@ exports.post = async (req, res, next) => {
         });
     }
 };
-
 
 exports.put = async (req, res, next) => {
     try {
