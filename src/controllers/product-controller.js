@@ -51,9 +51,9 @@ exports.getByTag = async (req, res, next) => {
 
 exports.post = async (req, res, next) => {
     let contract = new ValidationContract();
-    contract.hasMinLen(req.body.title, 3, 'O titulo de conter pelo menos 3 caracteres')
-    contract.hasMinLen(req.body.slug, 3, 'O titulo de conter pelo menos 3 caracteres')
-    contract.hasMinLen(req.body.description, 3, 'O titulo de conter pelo menos 3 caracteres')
+    contract.hasMinLen(req.body.title, 3, 'O titulo deve conter pelo menos 3 caracteres')
+    contract.hasMinLen(req.body.slug, 3, 'O titulo deve conter pelo menos 3 caracteres')
+    contract.hasMinLen(req.body.description, 3, 'O titulo deve conter pelo menos 3 caracteres')
 
     // Se os das dorem inválidos
     if (!contract.isValid()) {
