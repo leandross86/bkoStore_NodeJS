@@ -3,7 +3,8 @@ global.EMAIL_TMPL = 'Olá, <strong>{0}</strong> seja bem vindo à Node Store!';
 
 module.exports = {
     connectionString: 'mongodb+srv://bko:88159371@cluster0.issoo.azure.mongodb.net/NodeStore?retryWrites=true&w=majority',
-    //'mongodb+srv://bko:88159371@cluster0.liapp.mongodb.net/NodeStore?retryWrites=true&w=majorityNodeStore?retryWrites=true&w=majority',
     sendgridKey: 'SUA CHAVE',
     containerConnectionString: 'SUA CONNETION STRING'
+
+
 }
