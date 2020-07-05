@@ -1,7 +1,10 @@
 'use strict';
 
 const ValidationContract = require('../validators/fluent-vallidator');
-const repository = require('../repositories/product-repository')
+const repository = require('../repositories/product-repository');
+const azure = require('azure-storage');
+const guid = require('guid');
+let config = require('../config');
 
 
 exports.get = async (req, res, next) => {
@@ -62,13 +65,40 @@ exports.post = async (req, res, next) => {
     }
 
     try{
-        await repository.create(req.body)
+        //Cria o Blob Service
+        const blobSvc = azure.createBlobService(config.containerConnectionString)
+
+        let filename = guid.raw().toString() + '.jpg';
+        let rawdata = req.body.image;
+        let matches = rawdata.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/); //REGEX para remover itens indesejados(cabeçalho com informações)
+        let type = matches[1];
+        let buffer = new Buffer(matches[2], 'base64');
+
+        //Salva a imagem
+        await blobSvc.createBlockBlobFromText('product-images', filename, buffer,{
+            contentType: type
+        }, function (error, result, response) {
+            if (error) {
+                filename = 'default-product.png'
+            }
+        });
+
+        await repository.create({
+            title: req.body.title,
+            slug: req.body.slug,
+            description: req.body.description,
+            price: req.body.price,
+            active: true,
+            tags: req.body.tags,
+            image: 'https://nodestrbko.blob.core.windows.net/product-images/' + filename
+
+        })
         res.status(201).send({ 
             message: 'Produto cadastrado com sucesso!'
         });
     } catch (e) {
-            res.status(500).send({
-                message: 'Falha ao processar sua requisição'
+        res.status(500).send({
+            message: 'Falha ao processar sua requisição'
         });
     }
 };
