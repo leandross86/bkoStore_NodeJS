@@ -4,5 +4,6 @@ global.EMAIL_TMPL = 'Olá, <strong>{0}</strong> seja bem vindo à Node Store!';
 module.exports = {
     connectionString: 'SEU_BANCO_DE_DADOS',
     sendgridKey: 'SEU_EMAIL',
-    containerConnectionString: 'SUA_CONNECTION_STRING'
+    containerConnectionString: 'SUA_CONNECTION_STRING',
+    
 }
