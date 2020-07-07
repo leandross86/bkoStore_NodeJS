@@ -48,7 +48,7 @@ exports.authenticate = async(req, res, next) => {
             email: req.body.email,
             password: md5(req.body.password + global.SALT_KEY)
         });
-
+        console.log(customer)
         if (!customer) {
             res.status(404).send({
                 message: 'Usuário ou senha inválidos'
